@@ -14,21 +14,34 @@
 
 ## Assignment Checklist ✅✅
 
-> You will create ***ALL*** the database functionality for both of your collections. Get, Post and Put have been demoed for you. Use Mongoose documentation to use **GET by ID**, and **Delete by ID**. You can find all the ways to query in the [Mongoose docs](https://mongoosejs.com/docs/queries.html). 
+> You will create **_ALL_** the database functionality for both of your collections. Get, Post and Put have been demoed for you. Use Mongoose documentation to use **GET by ID**, and **Delete by ID**. You can find all the ways to query in the [Mongoose docs](https://mongoosejs.com/docs/queries.html).
 
-- [] Controller functions for both models
-- [] Separated route files with error handling including all
-- [] Monogoose Schema creation 
-  - [] Two models that relate to each other
-  - [] 3-5 properties on each model
-    - [] property 1
-    - [] property 2
-    - [] property 3
-    - [] property 4
-    - [] property 5
-  - [] Use at least 4 different data types overall
-    - [] data 1
-    - [] data 2
-    - [] data 3
-    - [] data 4
-  - [] Validate all nessacary parts of your model
+- [x] Controller functions for both models
+- [x] Separated route files with error handling
+  - [x] `characterRoutes.js`
+  - [x] `houseRoutes.js`
+- [x] Monogoose Schema creation
+  - [x] Two models that relate to each other
+    - [x] Students at Hogwarts
+    - [x] Hogwarts Houses
+  - [x] 3-5 properties on each model
+    - [x] **Characters Model**
+      - [x] name
+      - [x] age
+      - [x] house
+      - [x] year
+      - [x] blood purity
+      - [x] wand
+    - [x] **House Model**
+      - [x] name
+      - [x] founder
+      - [x] mascot
+      - [x] motto
+      - [x] colors
+      - [x] ghost
+  - [x] Use at least 4 different data types overall
+    - [x] string
+    - [x] enum
+    - [x] number
+    - [x] array
+  - [x] Validate all necessary parts of your model

@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const characterRoutes = require("./characterRoutes");
+const houseRoutes = require("./houseRoutes");
 
 router.get("/", (req, res) => {
   res.status(200).json({
@@ -10,5 +11,6 @@ router.get("/", (req, res) => {
 });
 
 router.use("/characters", characterRoutes);
+router.use("/houses", houseRoutes);
 
 module.exports = router;

@@ -1,13 +1,13 @@
-const Characters = require("../models/Characters");
+const Houses = require("../models/Houses");
 
-// GET
-exports.getAllCharacters = async (req, res) => {
+// GET all houses
+exports.getAllHouses = async (req, res) => {
   try {
-    const characters = await Characters.find({}).populate("house", "name");
+    const houses = await Houses.find({});
     res.status(200).json({
-      data: characters,
+      data: houses,
       success: true,
-      message: `${req.method} - request to Character endpoint`,
+      message: `${req.method} - Retrieved all Hogwarts Houses.`,
     });
   } catch (error) {
     res.status(500).json({
@@ -18,21 +18,21 @@ exports.getAllCharacters = async (req, res) => {
   }
 };
 
-// GET by ID
-exports.getCharacterByID = async (req, res) => {
+// GET house by ID
+exports.getHouseByID = async (req, res) => {
   try {
     const { id } = req.params;
-    const character = await Characters.findById(id).populate("house", "name");
-    if (!character) {
+    const house = await Houses.findById(id); 
+    if (!house) {
       return res.status(404).json({
         success: false,
-        message: `Character with ID ${id} not found.`,
+        message: `House with ID ${id} not found.`,
       });
     }
     res.status(200).json({
-      data: character,
+      data: house,
       success: true,
-      message: `${req.method} - Retrieved specific character.`,
+      message: `${req.method} - Retrieved specific Hogwarts House.`,
     });
   } catch (error) {
     res.status(500).json({
@@ -43,66 +43,69 @@ exports.getCharacterByID = async (req, res) => {
   }
 };
 
-// POST (create character)
-exports.createCharacter = async (req, res) => {
+
+// POST house
+exports.createHouse = async (req, res) => {
   try {
-    const newCharacter = await Characters.create(req.body);
+    const newHouse = await Houses.create(req.body);
     res.status(201).json({
-      data: newCharacter,
+      data: newHouse,
       success: true,
-      message: "Character created successfully.",
+      message: `House created successfully.`,
     });
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: "Failed to create character. Check your input.",
+      message: "Failed to create House. Check your input.",
       error: error.message,
     });
   }
 };
 
-// PUT (update character)
-exports.updateCharacter = async (req, res) => {
+// PUT (update) house
+exports.updateHouse = async (req, res) => {
   try {
     const { id } = req.params;
-    const character = await Characters.findByIdAndUpdate(id, req.body, {
+    const house = await Houses.findByIdAndUpdate(id, req.body, {
       new: true,
     });
-    if (!character) {
+
+    if (!house) {
       return res.status(404).json({
         success: false,
-        message: `Character with ID ${id} not found.`,
+        message: `House with ID ${id} not found.`,
       });
     }
+
     res.status(200).json({
-      data: character,
+      data: house,
       success: true,
-      message: "Character updated successfully.",
+      message: `House updated successfully.`,
     });
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: "Failed to update character.",
+      message: "Failed to update House.",
       error: error.message,
     });
   }
 };
 
 // DELETE
-exports.deleteCharacter = async (req, res) => {
+exports.deleteHouse = async (req, res) => {
   try {
     const { id } = req.params;
-    const deleted = await Characters.findByIdAndDelete(id);
+    const deleted = await Houses.findByIdAndDelete(id);
     if (!deleted) {
       return res.status(404).json({
         success: false,
-        message: `Character with ID ${id} not found.`,
+        message: `House ${id} not found. `,
       });
     }
     res.status(200).json({
       data: deleted,
       success: true,
-      message: `Character deleted successfully.`,
+      message: `House deleted successfully.`,
     });
   } catch (error) {
     res.status(500).json({
