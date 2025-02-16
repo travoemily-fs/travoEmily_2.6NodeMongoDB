@@ -45,3 +45,30 @@
     - [x] number
     - [x] array
   - [x] Validate all necessary parts of your model
+
+## 2.7 Assignment Checklist ✅✅
+
+
+> You will create a Postman collection for your first Mongo DB collection. You will write **three GOOD** tests for each of the 5 methods. Testing must be meaningful. In other words, your testing statuses and returned payload.
+
+
+- [x] GET method
+   - [x] 200 status code check for successful retrieval 
+   - [x] Checks if response is in an array
+   - [x] Checks to see if the first returned character in the array has a name
+- [x] GET by ID method
+   - [x] 200 status code check for successful retrieval 
+   - [x] Check to see if returned response contains an object
+   - [x] Check to see if returned character has a name
+- [x] POST method
+   - [x] 201 status for successful character creation
+   - [x] Check for that response contains an ID
+   - [x] Response contains valid entries (payload validation)
+- [x] DELETE by ID method
+   - [x] 200 status for successful deletion of data
+   - [x] Checks to make sure success message is returned
+   - [x] Double checks that character ID is no longer present
+- [x] PATCH/PUT by ID method
+   - [x] 200 status for successful update/alternation of data
+   - [x] Checks to see if all input fields have data
+   - [x] Checks to see if the returned house has been changed to slytherin
