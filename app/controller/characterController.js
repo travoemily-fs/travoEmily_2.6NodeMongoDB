@@ -4,7 +4,7 @@ const Characters = require("../models/Characters");
 exports.getAllCharacters = async (req, res) => {
   try {
     const characters = await Characters.find({}).populate("house", "name");
-    if (!character.length) {
+    if (!characters.length) {
       return res.status(404).json({
         success: false,
         message: "No characters found in the database.",
@@ -16,6 +16,8 @@ exports.getAllCharacters = async (req, res) => {
       message: `${req.method} - request to Character endpoint`,
     });
   } catch (error) {
+    console.error("Error fetching all characters:", error.message);
+
     res.status(500).json({
       success: false,
       message: "The server is experiencing an issue. Try again.",
@@ -41,6 +43,11 @@ exports.getCharacterByID = async (req, res) => {
       message: `${req.method} - Retrieved specific character.`,
     });
   } catch (error) {
+    console.error(
+      `Error fetching character with ID ${req.params.id}:`,
+      error.message
+    );
+
     res.status(500).json({
       success: false,
       message: "The server is experiencing an issue. Try again.",
@@ -52,6 +59,14 @@ exports.getCharacterByID = async (req, res) => {
 // POST (create character)
 exports.createCharacter = async (req, res) => {
   try {
+    const existingCharacter = await Characters.findOne({ name: req.body.name });
+    if (existingCharacter) {
+      return res.status(400).json({
+        success: false,
+        message: "A character with this name already exists.",
+      });
+    }
+
     const newCharacter = await Characters.create(req.body);
     res.status(201).json({
       data: newCharacter,
@@ -59,20 +74,14 @@ exports.createCharacter = async (req, res) => {
       message: "Character created successfully.",
     });
   } catch (error) {
-    if (error.name === "ValidationError") {
-      return res.status(400).json({
-        success: false,
-        message:
-          "Invalid character data. Please recheck your input fields and try again",
-        errors: error.errors,
-      });
-    }
+    console.error("Error creating character:", error.message);
+
+    res.status(500).json({
+      success: false,
+      message: "Server error: Failed to create character. Try again later.",
+      error: error.message,
+    });
   }
-  res.status(500).json({
-    success: false,
-    message: "Failed to create character. Check your input.",
-    error: error.message,
-  });
 };
 
 // PUT (update character)
@@ -94,6 +103,11 @@ exports.updateCharacter = async (req, res) => {
       message: "Character updated successfully.",
     });
   } catch (error) {
+    console.error(
+      `Error updating character with ID ${req.params.id}:`,
+      error.message
+    );
+
     res.status(500).json({
       success: false,
       message: "Failed to update character.",
@@ -119,6 +133,11 @@ exports.deleteCharacter = async (req, res) => {
       message: `Character deleted successfully.`,
     });
   } catch (error) {
+    console.error(
+      `Error deleting character with ID ${req.params.id}:`,
+      error.message
+    );
+
     res.status(500).json({
       success: false,
       message: "The server is experiencing an issue. Try again.",

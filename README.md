@@ -12,8 +12,6 @@
 ![Degree Program](https://img.shields.io/badge/Degree-Web%20Development-orange?logo=gnometerminal)
 <br>
 
-## Repo Directory:
-
 ## 2.6 Assignment Checklist ✅✅
 
 > You will create **_ALL_** the database functionality for both of your collections. Get, Post and Put have been demoed for you. Use Mongoose documentation to use **GET by ID**, and **Delete by ID**. You can find all the ways to query in the [Mongoose docs](https://mongoosejs.com/docs/queries.html).
@@ -47,29 +45,3 @@
     - [x] number
     - [x] array
   - [x] Validate all necessary parts of your model
-
-## 2.7 Assignment Checklist ✅✅
-
-> You will create a Postman collection for your first Mongo DB collection. You will write **three GOOD** tests for each of the 5 methods. Testing must be meaningful. In other words, your testing statuses and returned payload.
-
-- [x] GET method
-  - [x] 404 status: no characters found in DB
-  - [x] 200 status: request sent to Character endpoint
-  - [x] 500 status: server-side error processing request; no character data returned
-- [x] GET by ID method
-  - [x] 404 status: no character found with corresponding ID
-  - [x] 200 status: specific character found by ID
-  - [x] 500 status: server-side error processing request; no character data returned
-- [x] POST method
-  - [x] 201 status: new character was successfully created
-  - [x] 404 status: user-input error, recheck character input fields
-  - [x] 500 status: server-side error processing request; character not created
-- [x] DELETE by ID method
-  - [x] 404 status: character by ID was not found
-  - [x] 200 status: character successfully deleted
-  - [x] 500 status: server-side error processing request; character not deleted
-- [x] PATCH/PUT by ID method
-  - [x] 404 status: character by ID was not found
-  - [x] 200 status: character updated successfully
-  - [x] 500 status: server-side error processing request; character not updated
-
