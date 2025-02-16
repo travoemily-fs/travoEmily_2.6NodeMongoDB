@@ -4,6 +4,12 @@ const Characters = require("../models/Characters");
 exports.getAllCharacters = async (req, res) => {
   try {
     const characters = await Characters.find({}).populate("house", "name");
+    if (!character.length) {
+      return res.status(404).json({
+        success: false,
+        message: "No characters found in the database.",
+      });
+    }
     res.status(200).json({
       data: characters,
       success: true,
@@ -53,12 +59,20 @@ exports.createCharacter = async (req, res) => {
       message: "Character created successfully.",
     });
   } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: "Failed to create character. Check your input.",
-      error: error.message,
-    });
+    if (error.name === "ValidationError") {
+      return res.status(400).json({
+        success: false,
+        message:
+          "Invalid character data. Please recheck your input fields and try again",
+        errors: error.errors,
+      });
+    }
   }
+  res.status(500).json({
+    success: false,
+    message: "Failed to create character. Check your input.",
+    error: error.message,
+  });
 };
 
 // PUT (update character)
