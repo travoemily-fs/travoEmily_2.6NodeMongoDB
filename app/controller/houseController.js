@@ -1,9 +1,12 @@
 const Houses = require("../models/Houses");
+const messages = require("../utils/messages");
+const mongoose = require("mongoose");
 
 // GET all houses
 exports.getAllHouses = async (req, res) => {
   try {
-    const houses = await Houses.find({});
+    const houses = await Houses.find({}).select("-__v");
+
     res.status(200).json({
       data: houses,
       success: true,
@@ -12,7 +15,7 @@ exports.getAllHouses = async (req, res) => {
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: "The server is experiencing an issue. Try again.",
+      message: messages.serverError,
       error: error.message,
     });
   }
@@ -22,13 +25,21 @@ exports.getAllHouses = async (req, res) => {
 exports.getHouseByID = async (req, res) => {
   try {
     const { id } = req.params;
-    const house = await Houses.findById(id); 
+    const house = await Houses.findById(id).select("-__v");
+
     if (!house) {
       return res.status(404).json({
         success: false,
-        message: `House with ID ${id} not found.`,
+        message: messages.houseNotFound(id),
       });
     }
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid ID format. Please provide a valid ObjectId.",
+      });
+    }
+
     res.status(200).json({
       data: house,
       success: true,
@@ -37,12 +48,11 @@ exports.getHouseByID = async (req, res) => {
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: "The server is experiencing an issue. Try again.",
+      message: messages.serverError,
       error: error.message,
     });
   }
 };
-
 
 // POST house
 exports.createHouse = async (req, res) => {
@@ -51,12 +61,12 @@ exports.createHouse = async (req, res) => {
     res.status(201).json({
       data: newHouse,
       success: true,
-      message: `House created successfully.`,
+      message: messages.houseCreated,
     });
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: "Failed to create House. Check your input.",
+      message: messages.houseCreationFailed,
       error: error.message,
     });
   }
@@ -66,51 +76,63 @@ exports.createHouse = async (req, res) => {
 exports.updateHouse = async (req, res) => {
   try {
     const { id } = req.params;
-    const house = await Houses.findByIdAndUpdate(id, req.body, {
-      new: true,
-    });
 
-    if (!house) {
-      return res.status(404).json({
+    if (!Object.keys(req.body).length) {
+      return res.status(400).json({
         success: false,
-        message: `House with ID ${id} not found.`,
+        message: messages.emptyUpdateBody,
       });
     }
+    const existingHouse = await Houses.findById(id);
+    if (!existingHouse) {
+      return res.status(404).json({
+        success: false,
+        message: messages.houseNotFound(id),
+      });
+    }
+    const updatedHouse = await Houses.findByIdAndUpdate(id, req.body, {
+      new: true, 
+      runValidators: true, 
+    }).select("-__v"); 
 
     res.status(200).json({
-      data: house,
+      data: updatedHouse,
       success: true,
-      message: `House updated successfully.`,
+      message: messages.houseUpdated,
     });
+
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: "Failed to update House.",
+      message: messages.houseUpdateFailed,
       error: error.message,
     });
   }
 };
 
-// DELETE
+
+// DELETE house
 exports.deleteHouse = async (req, res) => {
   try {
     const { id } = req.params;
     const deleted = await Houses.findByIdAndDelete(id);
+
     if (!deleted) {
       return res.status(404).json({
         success: false,
-        message: `House ${id} not found. `,
+        message: messages.houseNotFound(id),
       });
     }
+
     res.status(200).json({
       data: deleted,
       success: true,
-      message: `House deleted successfully.`,
+      message: messages.houseDeleted,
     });
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: "The server is experiencing an issue. Try again.",
+      message: messages.houseDeleteFailed,
       error: error.message,
     });
   }

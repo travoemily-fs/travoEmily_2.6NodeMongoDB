@@ -1,7 +1,7 @@
 const express = require("express");
 const morgan = require("morgan");
 const app = express();
-const routeHandler = require("./routes");
+const routeHandler = require("./routes/index");
 
 app.use(express.json());
 app.use(morgan("dev"));

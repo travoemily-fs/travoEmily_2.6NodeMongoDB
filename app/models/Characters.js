@@ -15,9 +15,9 @@ const characterSchema = new mongoose.Schema(
       min: [11, "Students begin classes at Hogwarts at age eleven."],
     },
     house: {
-      type: String,
-      required: [true, "Hogwarts house is required to proceed."],
-      enum: ["Gryffindor", "Slytherin", "Hufflepuff", "Ravenclaw"], // ✅ Stores house name instead of ObjectId
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "House",
+      required: true,
     },
     year: {
       type: Number,

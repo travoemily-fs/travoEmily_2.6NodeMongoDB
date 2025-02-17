@@ -1,56 +1,67 @@
 const Characters = require("../models/Characters");
+const messages = require("../utils/messages");
+const mongoose = require("mongoose");
 
-// GET
+// GET all characters
 exports.getAllCharacters = async (req, res) => {
   try {
-    const characters = await Characters.find({}).populate("house", "name");
+    const characters = await Characters.find({})
+      .populate("house", "name")
+      .select("-__v");
+
     if (!characters.length) {
       return res.status(404).json({
         success: false,
-        message: "No characters found in the database.",
+        message: messages.noCharactersFound,
       });
     }
+
     res.status(200).json({
       data: characters,
       success: true,
-      message: `${req.method} - request to Character endpoint`,
+      message: `${req.method} - Retrieved all characters.`,
     });
   } catch (error) {
-    console.error("Error fetching all characters:", error.message);
-
     res.status(500).json({
       success: false,
-      message: "The server is experiencing an issue. Try again.",
+      message: messages.serverError,
       error: error.message,
     });
   }
 };
 
-// GET by ID
+// GET character by ID
 exports.getCharacterByID = async (req, res) => {
   try {
     const { id } = req.params;
-    const character = await Characters.findById(id).populate("house", "name");
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({
+        success: false,
+        message: messages.invalidCharacterId,
+      });
+    }
+
+    const character = await Characters.findById(id)
+      .populate("house", "name")
+      .select("-__v");
+
     if (!character) {
       return res.status(404).json({
         success: false,
-        message: `Character with ID ${id} not found.`,
+        message: messages.characterNotFound(id),
       });
     }
+
     res.status(200).json({
       data: character,
       success: true,
       message: `${req.method} - Retrieved specific character.`,
     });
   } catch (error) {
-    console.error(
-      `Error fetching character with ID ${req.params.id}:`,
-      error.message
-    );
-
     res.status(500).json({
       success: false,
-      message: "The server is experiencing an issue. Try again.",
+      message: messages.serverError,
       error: error.message,
     });
   }
@@ -59,88 +70,113 @@ exports.getCharacterByID = async (req, res) => {
 // POST (create character)
 exports.createCharacter = async (req, res) => {
   try {
-    const existingCharacter = await Characters.findOne({ name: req.body.name });
+    const { name, age, house, year, bloodPurity, wand } = req.body;
+
+    if (!name || !age || !house || !year || !bloodPurity || !wand) {
+      return res.status(400).json({
+        success: false,
+        message: messages.missingFields,
+      });
+    }
+
+    if (!mongoose.Types.ObjectId.isValid(house)) {
+      return res.status(400).json({
+        success: false,
+        message: messages.invalidHouseId,
+      });
+    }
+
+    const existingCharacter = await Characters.findOne({ name });
     if (existingCharacter) {
       return res.status(400).json({
         success: false,
-        message: "A character with this name already exists.",
+        message: messages.characterExists,
       });
     }
 
     const newCharacter = await Characters.create(req.body);
+
     res.status(201).json({
       data: newCharacter,
       success: true,
-      message: "Character created successfully.",
+      message: messages.characterCreated,
     });
   } catch (error) {
-    console.error("Error creating character:", error.message);
-
     res.status(500).json({
       success: false,
-      message: "Server error: Failed to create character. Try again later.",
+      message: messages.characterCreationFailed,
       error: error.message,
     });
   }
 };
 
-// PUT (update character)
+// PATCH (update character)
 exports.updateCharacter = async (req, res) => {
   try {
     const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({
+        success: false,
+        message: messages.invalidCharacterId,
+      });
+    }
+
     const character = await Characters.findByIdAndUpdate(id, req.body, {
       new: true,
     });
+
     if (!character) {
       return res.status(404).json({
         success: false,
-        message: `Character with ID ${id} not found.`,
+        message: messages.characterNotFound(id),
       });
     }
+
     res.status(200).json({
       data: character,
       success: true,
-      message: "Character updated successfully.",
+      message: messages.characterUpdated,
     });
   } catch (error) {
-    console.error(
-      `Error updating character with ID ${req.params.id}:`,
-      error.message
-    );
-
     res.status(500).json({
       success: false,
-      message: "Failed to update character.",
+      message: messages.characterUpdateFailed,
       error: error.message,
     });
   }
 };
 
-// DELETE
+// DELETE character
 exports.deleteCharacter = async (req, res) => {
   try {
     const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({
+        success: false,
+        message: messages.invalidCharacterId,
+      });
+    }
+
     const deleted = await Characters.findByIdAndDelete(id);
+
     if (!deleted) {
       return res.status(404).json({
         success: false,
-        message: `Character with ID ${id} not found.`,
+        message: messages.characterNotFound(id),
       });
     }
+
     res.status(200).json({
       data: deleted,
       success: true,
-      message: `Character deleted successfully.`,
+      message: messages.characterDeleted,
     });
   } catch (error) {
-    console.error(
-      `Error deleting character with ID ${req.params.id}:`,
-      error.message
-    );
-
     res.status(500).json({
       success: false,
-      message: "The server is experiencing an issue. Try again.",
+      message: messages.characterDeleteFailed,
       error: error.message,
     });
   }

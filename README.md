@@ -87,3 +87,36 @@
 - [x] Put your hardcoded messages in a Messages module
 - [x] When posting your second collection use the id from the first collection, (found in MongoDB)
 - [x] Use Postman to view ALL your function payloads
+
+## Hogwarts House ID Numbers
+
+- Slytherin: `67afa07feaba1b60465f1e21`
+- Gryffindor: `67afa01feaba1b60465f1e1f`
+- Hufflepuff: `67afa0d2eaba1b60465f1e23`
+- Ravenclaw: `67afa1b0eaba1b60465f1e25`
+
+## Character schema boilerplate
+
+`{
+  "name": "Elliot Hawthorne",
+  "age": 14,
+  "house": "65d12345a6b7c8d9e0f1g2h3", 
+  "year": 4,
+  "bloodPurity": "halfblood",
+  "wand": {
+    "length": 10.5,
+    "core": "Unicorn Hair",
+    "wood": "Blackthorn"
+  }
+}`
+
+## House schema boilerplate
+
+`{
+  "name": "Gryffindor",
+  "founder": "Godric Gryffindor",
+  "mascot": "Lion",
+  "motto": ["Courage, Bravery, Determination"],
+  "colors": ["Red", "Gold"],
+  "ghost": ["Nearly Headless Nick"]
+}`
