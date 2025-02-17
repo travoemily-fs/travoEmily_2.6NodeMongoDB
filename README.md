@@ -14,6 +14,8 @@
 
 ## 2.6 Assignment Checklist ✅✅
 
+🎥 Video presentation ⇢ [](x)
+
 > You will create **_ALL_** the database functionality for both of your collections. Get, Post and Put have been demoed for you. Use Mongoose documentation to use **GET by ID**, and **Delete by ID**. You can find all the ways to query in the [Mongoose docs](https://mongoosejs.com/docs/queries.html).
 
 - [x] Controller functions for both models
@@ -48,6 +50,8 @@
 
 ## 2.7 Assignment Checklist ✅✅
 
+🎥 Video presentation ⇢ [](x)
+
 > You will create a Postman collection for your first Mongo DB collection. You will write **three GOOD** tests for each of the 5 methods. Testing must be meaningful. In other words, your testing statuses and returned payload.
 
 - [x] GET method
@@ -69,11 +73,13 @@
 - [x] PATCH/PUT by ID method
   - [x] 200 status for successful update/alternation of data
   - [x] Checks to see if all input fields have data
-  - [x] Checks to see if the returned house has been changed to slytherin
+  - [x] Checks to see if the returned house has been changed to Slytherin
 
 ## Module 2: Second Collection ✅✅
 
-> You will finish your second collection (Model)
+🎥 Video presentation ⇢ [](x)
+
+> You will finish your second collection (Model) on Postman.
 
 - [x] Use select() to exclude info like version
 - [x] Use populate to display your first collection (model) in your second model
