@@ -14,7 +14,7 @@
 
 ## 2.6 Assignment Checklist ✅✅
 
-🎥 Video presentation ⇢ [https://youtu.be/v2uCYagZsp0](x)
+🎥 Video presentation ⇢ [x](https://youtu.be/v2uCYagZsp0)
 
 > You will create **_ALL_** the database functionality for both of your collections. Get, Post and Put have been demoed for you. Use Mongoose documentation to use **GET by ID**, and **Delete by ID**. You can find all the ways to query in the [Mongoose docs](https://mongoosejs.com/docs/queries.html).
 
@@ -50,7 +50,7 @@
 
 ## 2.7 Assignment Checklist ✅✅
 
-🎥 Video presentation ⇢ [https://youtu.be/rUleJWe88Ok](x)
+🎥 Video presentation ⇢ [x](https://youtu.be/rUleJWe88Ok)
 
 > You will create a Postman collection for your first Mongo DB collection. You will write **three GOOD** tests for each of the 5 methods. Testing must be meaningful. In other words, your testing statuses and returned payload.
 
@@ -77,7 +77,7 @@
 
 ## Module 2: Second Collection ✅✅
 
-🎥 Video presentation ⇢ [https://youtu.be/k-iqxngfiJw](x)
+🎥 Video presentation ⇢ [x](https://youtu.be/k-iqxngfiJw)
 
 > You will finish your second collection (Model) on Postman.
 
