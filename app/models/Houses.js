@@ -5,7 +5,6 @@ const housesSchema = new mongoose.Schema(
     name: {
       type: String,
       required: [true, "House name is required to proceed."],
-      enum: ["Gryffindor", "Slytherin", "Hufflepuff", "Ravenclaw"],
       unique: true,
     },
     founder: {

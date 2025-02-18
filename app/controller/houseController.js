@@ -21,7 +21,7 @@ exports.getAllHouses = async (req, res) => {
   }
 };
 
-// GET house by ID
+// GET houses by ID
 exports.getHouseByID = async (req, res) => {
   try {
     const { id } = req.params;

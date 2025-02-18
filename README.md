@@ -14,7 +14,7 @@
 
 ## 2.6 Assignment Checklist ✅✅
 
-🎥 Video presentation ⇢ [](x)
+🎥 Video presentation ⇢ [https://youtu.be/v2uCYagZsp0](x)
 
 > You will create **_ALL_** the database functionality for both of your collections. Get, Post and Put have been demoed for you. Use Mongoose documentation to use **GET by ID**, and **Delete by ID**. You can find all the ways to query in the [Mongoose docs](https://mongoosejs.com/docs/queries.html).
 
@@ -50,7 +50,7 @@
 
 ## 2.7 Assignment Checklist ✅✅
 
-🎥 Video presentation ⇢ [](x)
+🎥 Video presentation ⇢ [https://youtu.be/rUleJWe88Ok](x)
 
 > You will create a Postman collection for your first Mongo DB collection. You will write **three GOOD** tests for each of the 5 methods. Testing must be meaningful. In other words, your testing statuses and returned payload.
 
@@ -69,15 +69,15 @@
 - [x] DELETE by ID method
   - [x] 200 status for successful deletion of data
   - [x] Checks to make sure success message is returned
-  - [x] Double checks that character ID is no longer present
+  - [x] Checks for success boolean
 - [x] PATCH/PUT by ID method
   - [x] 200 status for successful update/alternation of data
-  - [x] Checks to see if all input fields have data
-  - [x] Checks to see if the returned house has been changed to Slytherin
+  - [x] Checks to see if data is valid
+  - [x] Checks for success message
 
 ## Module 2: Second Collection ✅✅
 
-🎥 Video presentation ⇢ [](x)
+🎥 Video presentation ⇢ [https://youtu.be/k-iqxngfiJw](x)
 
 > You will finish your second collection (Model) on Postman.
 
@@ -87,36 +87,3 @@
 - [x] Put your hardcoded messages in a Messages module
 - [x] When posting your second collection use the id from the first collection, (found in MongoDB)
 - [x] Use Postman to view ALL your function payloads
-
-## Hogwarts House ID Numbers
-
-- Slytherin: `67afa07feaba1b60465f1e21`
-- Gryffindor: `67afa01feaba1b60465f1e1f`
-- Hufflepuff: `67afa0d2eaba1b60465f1e23`
-- Ravenclaw: `67afa1b0eaba1b60465f1e25`
-
-## Character schema boilerplate
-
-`{
-  "name": "Elliot Hawthorne",
-  "age": 14,
-  "house": "65d12345a6b7c8d9e0f1g2h3", 
-  "year": 4,
-  "bloodPurity": "halfblood",
-  "wand": {
-    "length": 10.5,
-    "core": "Unicorn Hair",
-    "wood": "Blackthorn"
-  }
-}`
-
-## House schema boilerplate
-
-`{
-  "name": "Gryffindor",
-  "founder": "Godric Gryffindor",
-  "mascot": "Lion",
-  "motto": ["Courage, Bravery, Determination"],
-  "colors": ["Red", "Gold"],
-  "ghost": ["Nearly Headless Nick"]
-}`

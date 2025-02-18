@@ -18,6 +18,8 @@ router.get("/:id", getCharacterByID);
 
 // PUT by ID method
 router.put("/:id", updateCharacter);
+router.patch("/:id", updateCharacter);
+
 
 // DELETE by ID method
 router.delete("/:id", deleteCharacter);
